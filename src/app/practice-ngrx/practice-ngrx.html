@@ -1,0 +1,86 @@
+<form [formGroup]="personForm()" (ngSubmit)="onSubmit()">
+  <label for="empId">Id:</label>
+  <input id="empId" type="text" formControlName="empId" />
+
+  <label for="personName">Name:</label>
+  <input id="personName" formControlName="personName" />
+
+  <label for="personAge">Age:</label>
+  <input id="personAge" type="number" formControlName="personAge" />
+
+  <label for="personAddress">Address:</label>
+  <input id="personAddress" formControlName="personAddress" />
+
+  <label for="sex">Sex </label>
+  <input id="sex" formControlName="sex" />
+
+  <label for="personPhone">Phone:</label>
+  <input id="personPhone" formControlName="personPhone" />
+
+  <label for="personEmail">Email:</label>
+  <input id="personEmail" type="email" formControlName="personEmail" />
+
+  <button type="submit">Submit</button>
+</form>
+
+<form [formGroup]="personDeleteForm()" (ngSubmit)="onDeleteSubmit()">
+  <label for="deleteId">Id:</label>
+  <input id="deleteId" type="text" formControlName="deleteId" />
+  <button type="submit">Delete</button>
+</form>
+
+
+<form [formGroup]="personUpdateForm()" (ngSubmit)="onUpdateSubmit()">
+  <label for="updateId">Id:</label>
+  <input id="updateId" type="text" formControlName="updateId" />
+
+  <label for="updateAge">Age:</label>
+  <input id="updateAge" type="number" formControlName="updateAge" />
+
+  <label for="updateAddress">Address:</label>
+  <input id="updateAddress" formControlName="updateAddress" />
+
+  <label for="updatePhone">Phone:</label>
+  <input id="updatePhone" formControlName="updatePhone" />
+
+  <label for="updateEmail">Email:</label>
+  <input id="updateEmail" type="email" formControlName="updateEmail" />
+
+  <button type="submit">Update</button>
+</form>
+
+<form [formGroup]="personSearchForm()" (ngSubmit)="onSearchSubmit()">
+  <label for="searchId">Id:</label>
+  <input id="searchId" type="text" formControlName="searchId" />
+
+  <label for="searchName">Name:</label>
+  <input id="searchName" type="text" formControlName="searchName" />
+
+  <button type="submit">Search</button>
+</form>
+<input 
+  type="file"
+  (change)="onFileSelected($event)" 
+/>
+<button (click)="loadFromDb()">Load from IndexedDB</button>
+<form [formGroup]="excelDbSearchForm()" (ngSubmit)="onExcelDbSearchSubmit()">
+  <label for="searchField">Field:</label>
+  <input id="searchField" type="text" formControlName="searchField" />
+
+  <label for="searchValue">Value:</label>
+  <input id="searchValue" type="text" formControlName="searchValue" />
+
+  <button type="submit">Search</button>
+</form>
+
+<button type="submit" (click)="showGrid()">Show Results</button>
+
+<div *ngIf="results$ | async as any" style="width: 100%; height: 100%;">
+<ag-grid-angular
+  [rowData]="results$ | async"
+  [columnDefs]="columnDefs"
+  [pagination]="true"
+  [paginationPageSize]="10"
+  style="width: 100%; height: 500px"
+></ag-grid-angular>
+</div>
